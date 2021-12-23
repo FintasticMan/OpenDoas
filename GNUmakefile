@@ -1,7 +1,8 @@
-PROG=	doas
-MAN=	doas.1 doas.conf.5
+PROG=		doas
+MAN=		doas.1 doas.conf.5
+COMPLETION=	doas.completion
 
-SRCS=	parse.y doas.c env.c
+SRCS=		parse.y doas.c env.c
 
 include config.mk
 
@@ -19,17 +20,20 @@ install: ${PROG} ${MAN}
 	mkdir -p -m 0755 ${DESTDIR}${BINDIR}
 	mkdir -p -m 0755 ${DESTDIR}${MANDIR}/man1
 	mkdir -p -m 0755 ${DESTDIR}${MANDIR}/man5
+	mkdir -p -m 0755 ${DESTDIR}${COMPDIR}/completions
 	cp -f ${PROG} ${DESTDIR}${BINDIR}
 	chown ${BINOWN}:${BINGRP} ${DESTDIR}${BINDIR}/${PROG}
 	chmod ${BINMODE} ${DESTDIR}${BINDIR}/${PROG}
 	cp -f doas.1 ${DESTDIR}${MANDIR}/man1
 	cp -f doas.conf.5 ${DESTDIR}${MANDIR}/man5
+	cp -f doas.completion ${DESTDIR}$(COMPDIR)/completions/doas
 
 uninstall:
 	rm -f ${DESTDIR}${BINDIR}/${PROG}
 	rm -f ${DESTDIR}${PAMDIR}/doas
 	rm -f ${DESTDIR}${MANDIR}/man1/doas.1
 	rm -f ${DESTDIR}${MANDIR}/man5/doas.conf.5
+	rm -f ${DESTDIR}${COMPDIR}/completions/doas
 
 clean:
 	rm -f ${PROG} ${OBJS} ${OBJS:.o=.d} parse.c

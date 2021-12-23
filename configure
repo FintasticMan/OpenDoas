@@ -14,6 +14,7 @@ usage: configure [options]
   --bindir=DIR           user executables [PREFIX/bin]
   --datadir=DIR          architecture-independent data files [PREFIX/share]
   --mandir=DIR           manual pages [DATADIR/man]
+  --compdir=DIR          bash completions [DATADIR/bash-completion]
   --sysconfdir=DIR       directory for configuration files [/etc]
 
   --build=build-alias    a cpu-vendor-opsys for the system where the application will be built
@@ -50,6 +51,7 @@ for x; do
 	--bindir) BINDIR=$var ;;
 	--datadir) SHAREDIR=$var ;;
 	--mandir) MANDIR=$var ;;
+	--compdir) COMPDIR=$var ;;
 	--sysconfdir) SYSCONFDIR=$var ;;
 	--build) BUILD=$var ;;
 	--host) HOST=$var ;;
@@ -131,6 +133,7 @@ esac
 : ${BINDIR:=${PREFIX}/bin}
 : ${SHAREDIR:=${PREFIX}/share}
 : ${MANDIR:=${SHAREDIR}/man}
+: ${COMPDIR:=${SHAREDIR}/bash-completion}
 : ${SYSCONFDIR:=/etc}
 : ${BINMODE:=4755}
 : ${BINOWN:=root}
@@ -142,6 +145,7 @@ EPREFIX  ?=	${EPREFIX}
 BINDIR   ?=	${BINDIR}
 SHAREDIR ?=	${SHAREDIR}
 MANDIR   ?=	${MANDIR}
+COMPDIR  ?=	${COMPDIR}
 SYSCONFDIR?=	${SYSCONFDIR}
 BINMODE  ?=	${BINMODE}
 BINOWN  ?=	${BINOWN}
